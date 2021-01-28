@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href='http://solod.webhostapp.com/style.css' rel='stylesheet' type='text/css'>
+    <script>
+        function addScript(src) {
+            let elem = document.createElement("script");
+            elem.src = src;
+            document.head.appendChild(elem);
+        }
+
+        function onUserData(data) {
+            console.log(data);
+        }
+
+        function changeImg(){
+            document.getElementById('pic1').src = 'http://localhost:4200/otherimg';
+        }
+        function getContent(){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:4200/content');
+            xhr.onload = xhr.onerror = function() {
+                if (this.status == 200) {
+                    console.log(this.response);
+                } else {
+                    console.log("error " + this.status);
+                };
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <p><img src='https://upload.wikimedia.org /wikipedia/diagram.png' alt='CSP'></p>
+    <p><img id='pic1' src='http://localhost:4200/img' alt='foto'></p>
+    <input type='button' value='change img' onclick='changeImg()'><br>
+    <input type='button' value='get content' onclick='getContent()'>
+    <button type="button" onclick="addScript(`http://127.0.0.1:4200/customer/13?callback=${onUserData}`)">
+        Add JS
+    </button>
+</body>
+</html>
